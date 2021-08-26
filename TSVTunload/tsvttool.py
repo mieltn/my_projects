@@ -100,7 +100,7 @@ M(M).YYYY-M(M).YYYY
             )
         )
 
-    return self.get_time_filters()
+    return time_filters()
 
 
 def download_stat(driver, month, downloads):
