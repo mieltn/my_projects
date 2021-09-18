@@ -12,6 +12,8 @@ import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+import sqlite3
+from sqlalchemy import create_engine
 
 url = 'http://stat.customs.gov.ru/unload'
 
@@ -291,3 +293,22 @@ def upload_to_file(df, path):
         df.to_csv(os.path.join(path, 'TSVTdata.csv'), mode='a', index=False, header=False)
     else:
         df.to_csv(os.path.join(path, 'TSVTdata.csv'), index=False)
+
+
+def upload_to_sqlite3(df, path):
+    '''
+    Uploads processed dataframe to an existing sqlite3 database with previous data.
+    Uses sqlalchemy to create connection.
+    '''
+    conn = sqlite3.connect(os.path.join(path, 'TSVTstat.db'))
+    cur = conn.cursor()
+    sql = 'SELECT EXISTS(SELECT 1 FROM TSVTdata WHERE period = ?);'
+    cur.execute(sql, (df.period.max(), ))
+    if cur.fetchone()[0] == 1:
+        sql = 'DELETE FROM TSVTdata WHERE period = ?;'
+        cur.execute(sql, (df.period.max(), ))
+        conn.commit()
+    conn.close()
+
+    eng = create_engine('sqlite:///{}'.format(os.path.join(path, 'TSVTstat.db')))
+    df.to_sql('TSVTdata', con=eng, index=False, chunksize=100000, if_exists='append')
