@@ -3,3 +3,5 @@ This was a part of university project about estimating attitude of people to tra
 During the part with a content analysis:
 - Tweets mentioning Moscow Central Circle or Moscow Central Diameter were unloaded using [<i>twint</i> module](https://github.com/twintproject/twint) (twitter.ipynb)
 - Raw text was preprocessed to become more useful for data analysis: word count and sentiment dictionary-based analysis (mcc.ipynb and mcd.ipynb)
+ 
+ <i>* The project was done in the fall of 2020, by that moment I had been learning Python for 2 months, so sorry for the readability</i>
