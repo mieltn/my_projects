@@ -4,5 +4,5 @@ publish some of my projects here
 - sbermarket - kaggle competition, predicting next customer's basket by orders data
 - titanic - Titanic kaggle competition
 - swift_codes - parsing website to get banks' swift-codes
-- content_analysis_twitter - unloading tweets by the specific theme, trying to run dictionary based semantic analysis
+- content_analysis_twitter - unloading tweets by specific theme, performing dictionary based semantic analysis
 - attach_downloader - script to download email attachments
