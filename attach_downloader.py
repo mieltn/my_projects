@@ -56,17 +56,19 @@ class EmailDownloader():
 
         return att_path
 
+    
+if __name__ == '__main__':
+    
+    attach_downloader = EmailDownloader()
 
-attach_downloader = EmailDownloader()
+    email_folder = input('Enter email folder: ')
+    sender = input('Enter sender: ')
+    start_date = input('Enter start date (day-month abbreviated name-yaer): ')
+    end_date = input('Enter end date (day-month abbreviated name-yaer): ')
+    download_folder = input('Enter download_folder: ')
 
-email_folder = input('Enter email folder: ')
-sender = input('Enter sender: ')
-start_date = input('Enter start date (day-month abbreviated name-yaer): ')
-end_date = input('Enter end date (day-month abbreviated name-yaer): ')
-download_folder = input('Enter download_folder: ')
+    emails = attach_downloader.fetch_msg(email_folder, sender, start_date, end_date)
 
-emails = attach_downloader.fetch_msg(email_folder, sender, start_date, end_date)
-
-for doc in emails:
+    for doc in emails:
     attach_downloader.save_attach(doc, download_folder)
 
